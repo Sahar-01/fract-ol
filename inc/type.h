@@ -1,26 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   keys.h                                             :+:      :+:    :+:   */
+/*   type.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: scheragh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/18 17:52:53 by scheragh          #+#    #+#             */
-/*   Updated: 2025/08/18 17:53:18 by scheragh         ###   ########.fr       */
+/*   Created: 2025/08/18 18:34:15 by scheragh          #+#    #+#             */
+/*   Updated: 2025/08/18 18:42:03 by scheragh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#ifndef KEYS_H
-# define KEYS_H
+#ifndef TYPE_H
+# define TYPE_H
 
-enum e_linux_keys
+typedef enum e_type
 {
-	KEY_ESC = 65307,
-	LEFT = 65361,
-	RIGHT = 65363,
-	DOWN = 65364,
-	UP = 65362,
-	SCROLL_DOWN = 5,
-	SCROLL_UP = 4,
-};
-
+	MANDELBROT,
+	JULIA
+}	t_type;
 #endif

@@ -1,42 +1,85 @@
-
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: scheragh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/12 16:43:25 by scheragh          #+#    #+#             */
-/*   Updated: 2025/08/12 19:12:10 by scheragh         ###   ########.fr       */
+/*   Created: 2025/08/18 18:48:36 by scheragh          #+#    #+#             */
+/*   Updated: 2025/08/18 19:03:47 by scheragh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../inc/fractol.h"
-#include "../inc/image.h"
+
+double	ft_atof(const char *str)
+{
+	double	result;
+	double	sign;
+	double	frac;
+	double	divider;
+
+	result = 0.0;
+	sign = 1.0;
+	if (*str == '-' || *str == '+')
+	{
+		if (*str == '-')
+			sign = -1.0;
+		str++;
+	}
+	while (*str >= '0' && *str <= '9')
+	{
+		result = result * 10.0 + (*str - '0');
+		str++;
+	}
+	if (*str == '.')
+		str++;
+	frac = 0.0;
+	divider = 1.0;
+	while (*str >= '0' && *str <= '9')
+	{
+		frac = frac * 10.0 + (*str - '0');
+		divider *= 10.0;
+		str++;
+	}
+	return (sign * (result + frac / divider));
+}
+
+static int	check_args(int argc, char **argv, t_env *env)
+{
+	if (argc == 2 && !ft_strcmp(argv[1], "Mandelbrot"))
+		env->fractal_type = MANDELBROT;
+	else if (argc == 4 && !ft_strcmp(argv[1], "Julia"))
+	{
+		env->fractal_type = JULIA;
+		env->julia_c.re = ft_atof(argv[2]);
+		env->julia_c.im = ft_atof(argv[3]);
+	}
+	else
+	{
+		ft_printf("Usage:\n");
+		ft_printf("./fractol Mandelbrot\n");
+		ft_printf("./fractol Julia <real> <imag>\n");
+		return (0);
+	}
+	return (1);
+}
 
 int	main(int argc, char **argv)
 {
-	t_env	*mlx_env;
+	t_env	*env;
 
-	if ((argc != 2) || !argv[1])
-	{
-		ft_printf("Usage: %s <Mandlebrot | Julia>\n", argv[0]);
+	env = malloc(sizeof(t_env));
+	if (!env || !check_args(argc, argv, env))
 		return (1);
-	}
-	mlx_env = malloc(sizeof(t_env));
-	if (!mlx_env)
-		return (1);
-	initialise_mlx(mlx_env);
-	init_image(mlx_env);
-	mlx_key_hook(mlx_env->window, key_hook, mlx_env);
-	mlx_mouse_hook(mlx_env->window, mouse_hook, mlx_env);
-	mlx_hook(mlx_env->window, 2, 1L << 0, handle_events, mlx_env);
-	mlx_hook(mlx_env->window, 17, 0, close_window, mlx_env);
-	if (ft_strcmp(argv[1], "Julia") == 0)
-		draw_julia(mlx_env);
-	else if (ft_strcmp(argv[1], "Mandelbrot") == 0)
-		draw_mandlebrot(mlx_env);
+	initialise_mlx(env);
+	init_image(env);
+	mlx_key_hook(env->window, key_hook, env);
+	mlx_mouse_hook(env->window, mouse_hook, env);
+	mlx_hook(env->window, 17, 0, close_window, env);
+	if (env->fractal_type == MANDELBROT)
+		draw_mandelbrot(env);
 	else
-		ft_printf("expected: ");
-	mlx_loop(mlx_env->mlx);
-	free(mlx_env);
+		draw_julia(env);
+	mlx_loop(env->mlx);
 	return (0);
 }
