@@ -9,7 +9,12 @@ LIBFT_A = $(LIBFT_DIR)/libft.a
 
 SRC_FILES = $(SRC_DIR)/main.c \
 			$(SRC_DIR)/init_mlx.c \
-			$(SRC_DIR)/events.c 
+			$(SRC_DIR)/events.c \
+			$(SRC_DIR)/julia.c \
+			$(SRC_DIR)/mandlebrot.c \
+			$(SRC_DIR)/utils.c \
+			$(SRC_DIR)/mouse.c \
+			$(SRC_DIR)/keys.c 
 OBJ_FILES = $(SRC_FILES:.c=.o)
 
 CC = cc

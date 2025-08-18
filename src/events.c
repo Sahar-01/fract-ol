@@ -10,14 +10,21 @@
 /*                                                                            */
 /* ************************************************************************** */
 #include "../inc/fractol.h"
+#include "../inc/keys.h"
 
-int	close_window(int keycode, t_env *mlx_env)
+int	close_window(t_env *mlx_env)
 {
-	if (keycode == 65307)
-	{
+	if (mlx_env->image.image)
+		mlx_destroy_image(mlx_env->mlx, mlx_env->image.image);
+	if (mlx_env->window)
 		mlx_destroy_window(mlx_env->mlx, mlx_env->window);
-		exit(0);
-	}
+	exit(EXIT_SUCCESS);
+	return (0);
+}
 
+int	handle_events(int keycode, t_env *mlx_env)
+{
+	if (keycode == KEY_ESC)
+		close_window(mlx_env);
 	return (0);
 }
