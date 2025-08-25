@@ -15,18 +15,20 @@ int	key_hook(int keycode, t_env *env)
 {
 	if (keycode == 65307)
 		exit(0);
-	else if (keycode == 65361)
+	else if (keycode == LEFT)
 		env->offset_x -= 0.1 / env->zoom;
-	else if (keycode == 65363)
+	else if (keycode == RIGHT)
 		env->offset_x += 0.1 / env->zoom;
-	else if (keycode == 65362)
+	else if (keycode == UP)
 		env->offset_y -= 0.1 / env->zoom;
-	else if (keycode == 65364)
+	else if (keycode == DOWN)
 		env->offset_y += 0.1 / env->zoom;
 	init_image(env);
 	if (env->fractal_type == JULIA)
 		draw_julia(env);
-	else
+	else if (env->fractal_type == MANDELBROT)
 		draw_mandelbrot(env);
+	else
+		draw_cantor(env);
 	return (0);
 }

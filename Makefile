@@ -12,6 +12,7 @@ SRC_FILES = $(SRC_DIR)/main.c \
 			$(SRC_DIR)/events.c \
 			$(SRC_DIR)/julia.c \
 			$(SRC_DIR)/mandelbrot.c \
+			$(SRC_DIR)/cantor.c \
 			$(SRC_DIR)/utils.c \
 			$(SRC_DIR)/mouse.c \
 			$(SRC_DIR)/keys.c \

@@ -29,16 +29,16 @@ typedef struct s_complex
 
 typedef struct s_env
 {
-	void	*mlx;
-	void	*window;
-	t_image	image;
-	t_type	fractal_type;
-	double	zoom;
-	double	offset_x;
-	double	offset_y;
-	int		x;
-	int		y;
-	int		max_iter;
+	int			x;
+	int			y;
+	int			max_iter;
+	double		zoom;
+	double		offset_x;
+	double		offset_y;
+	void		*mlx;
+	void		*window;
+	t_image		image;
+	t_type		fractal_type;
 	t_complex	julia_c;
 }	t_env;
 
@@ -61,6 +61,7 @@ void		zoom(t_env *mlx_env, int x, int y, int direction);
 //mandlebrot
 void		draw_julia(t_env *mlx_env);
 void		draw_mandelbrot(t_env *mlx_env);
+void		draw_cantor(t_env *env);
 void		calculate_mandelbrot(t_env *env, int x, int y);
 
 //colours

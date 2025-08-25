@@ -10,12 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 #include "../inc/fractol.h"
-#include "../inc/keys.h"
 
 int	close_window(t_env *mlx_env)
 {
 	if (mlx_env->image.image)
-	    mlx_destroy_image(mlx_env->mlx, mlx_env->image.image);
+		mlx_destroy_image(mlx_env->mlx, mlx_env->image.image);
 	if (mlx_env->window)
 		mlx_destroy_window(mlx_env->mlx, mlx_env->window);
 	free(mlx_env);

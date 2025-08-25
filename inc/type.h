@@ -15,6 +15,7 @@
 typedef enum e_type
 {
 	MANDELBROT,
-	JULIA
+	JULIA,
+	CANTOR
 }	t_type;
 #endif

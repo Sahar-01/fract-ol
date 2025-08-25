@@ -70,10 +70,12 @@ void	zoom(t_env *mlx_env, int x, int y, int direction)
 	mlx_env->offset_y = mouse_im
 		- (y - HEIGHT / 2.0) / (0.5 * mlx_env->zoom * HEIGHT);
 	if (mlx_env->image.image)
-        mlx_destroy_image(mlx_env->mlx, mlx_env->image.image);
+        	mlx_destroy_image(mlx_env->mlx, mlx_env->image.image);
 	init_image(mlx_env);
 	if (mlx_env->fractal_type == JULIA)
 		draw_julia(mlx_env);
-	else
+	else if (mlx_env->fractal_type == MANDELBROT)
 		draw_mandelbrot(mlx_env);
+	else
+		draw_cantor(mlx_env);
 }
