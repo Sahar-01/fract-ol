@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 #include "../inc/fractol.h"
-#include <math.h>
 
 static int	get_mandelbrot_iter(t_complex c, int max_iter)
 {

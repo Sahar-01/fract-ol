@@ -29,6 +29,6 @@ int	key_hook(int keycode, t_env *env)
 	else if (env->fractal_type == MANDELBROT)
 		draw_mandelbrot(env);
 	else
-		draw_cantor(env);
+		draw_tricorn(env);
 	return (0);
 }

@@ -17,45 +17,12 @@ static void	ft_print_usage(void)
 	ft_printf("Not Allowed");
 }
 
-double	ft_atof(const char *str)
-{
-	int		i;
-	int		j;
-	int		flag;
-	float	val;
-	char	c;
-
-	i = 0;
-	j = 0;
-	val = 0;
-	flag = 0;
-	c = *(str + i);
-	while (c != '\0')
-	{
-		if (c != '.')
-		{
-			val = (val * 10) + (c - '0');
-			if (flag == 1)
-				j--;
-		}
-		if (c == '.')
-		{
-			if (flag == 1)
-				return (0);
-			flag = 1;
-		}
-		i++;
-	}
-	val = val * pow(10, j);
-	return (val);
-}
-
 static int	check_args(int argc, char **argv, t_env *env)
 {
 	if (argc == 2 && !ft_strcmp(argv[1], "Mandelbrot"))
 		env->fractal_type = MANDELBROT;
-	else if (argc == 2 && !ft_strcmp(argv[1], "Cantor"))
-		env->fractal_type = CANTOR;
+	else if (argc == 2 && !ft_strcmp(argv[1], "Tricorn"))
+		env->fractal_type = TRICORN;
 	else if (!ft_strcmp(argv[1], "Julia") && (argc == 2 || argc == 4))
 	{
 		env->fractal_type = JULIA;
@@ -93,8 +60,8 @@ int	main(int argc, char **argv)
 	ft_printf("Fractal type: %d\n", env->fractal_type);
 	if (env->fractal_type == MANDELBROT)
 		draw_mandelbrot(env);
-	else if (env->fractal_type == CANTOR)
-		draw_cantor(env);
+	else if (env->fractal_type == TRICORN)
+		draw_tricorn(env);
 	else
 		draw_julia(env);
 	mlx_loop(env->mlx);

@@ -77,5 +77,5 @@ void	zoom(t_env *mlx_env, int x, int y, int direction)
 	else if (mlx_env->fractal_type == MANDELBROT)
 		draw_mandelbrot(mlx_env);
 	else
-		draw_cantor(mlx_env);
+		draw_tricorn(mlx_env);
 }

@@ -58,10 +58,11 @@ int			handle_events(int keycode, t_env *mlx_env);
 int			close_window(t_env *mlx_env);
 void		my_mlx_pixel_put(t_image *image, int x, int y, int colour);
 void		zoom(t_env *mlx_env, int x, int y, int direction);
+double		ft_atof(const char *str);
 //mandlebrot
 void		draw_julia(t_env *mlx_env);
 void		draw_mandelbrot(t_env *mlx_env);
-void		draw_cantor(t_env *env);
+void		draw_tricorn(t_env *env);
 void		calculate_mandelbrot(t_env *env, int x, int y);
 
 //colours
