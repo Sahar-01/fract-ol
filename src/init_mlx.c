@@ -27,6 +27,8 @@ void	initialise_mlx(t_env *mlx_env)
 
 void	init_image(t_env *env)
 {
+	if (env->image.image != NULL)
+		mlx_destroy_image(env->mlx, env->image.image);
 	env->image.image = mlx_new_image(env->mlx, WIDTH, HEIGHT);
 	if (!env->image.image)
 		exit(1);

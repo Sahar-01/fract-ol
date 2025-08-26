@@ -6,7 +6,7 @@
 /*   By: scheragh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 18:03:40 by scheragh          #+#    #+#             */
-/*   Updated: 2025/08/18 18:19:17 by scheragh         ###   ########.fr       */
+/*   Updated: 2025/08/26 15:11:19 by scheragh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../inc/fractol.h"
@@ -16,13 +16,12 @@ static int	get_mandelbrot_iter(t_complex c, int max_iter, int type)
 	t_complex	z;
 	double		tmp;
 	int			i;
-	int		constant;
+	double		constant;
 
-	if (type == 0)
-		constant = 2.0;
-	else if (type == 2)
-		constant = -2.0;
 	i = 0;
+	constant = 2.0;
+	if (type == 0)
+		constant = -2.0;
 	z.re = 0;
 	z.im = 0;
 	while (i < max_iter)

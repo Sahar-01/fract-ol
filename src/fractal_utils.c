@@ -6,7 +6,7 @@
 /*   By: scheragh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 18:08:58 by scheragh          #+#    #+#             */
-/*   Updated: 2025/08/18 18:10:29 by scheragh         ###   ########.fr       */
+/*   Updated: 2025/08/26 15:45:44 by scheragh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../inc/fractol.h"
@@ -22,23 +22,30 @@ t_complex	get_complex(int x, int y, t_env *env)
 
 static int	rgb(double r, double g, double b)
 {
-	int	ri = (int)(r * 255.0);
-	int	gi = (int)(g * 255.0);
-	int	bi = (int)(b * 255.0);
+	int		ri;
+	int		gi;
+	int		bi;
 
+	r = fmin(fmax(r, 0.0), 1.0);
+	g = fmin(fmax(g, 0.0), 1.0);
+	b = fmin(fmax(b, 0.0), 1.0);
+	ri = (int)(r * 255.0);
+	gi = (int)(g * 255.0);
+	bi = (int)(b * 255.0);
 	return ((ri << 16) | (gi << 8) | bi);
 }
 
 int	get_colour(int i, int max_iter, int mode)
 {
-	double	t;
-	double	r;
-	double	g;
-	double	b;
-
-	if (i >= max_iter)
+	double	t = 0.0;
+	double	r = 0.0;
+	double	g = 0.0;
+	double	b = 0.0;
+	if (max_iter <= 0 || i >= max_iter || i < 0)
 		return (0x000000);
-	t = (double)i / max_iter;
+
+	t = (double)i / (double)max_iter;
+
 	if (mode % 3 == 0)
 	{
 		r = 9 * (1 - t) * t * t * t;
@@ -47,15 +54,16 @@ int	get_colour(int i, int max_iter, int mode)
 	}
 	else if (mode % 3 == 1)
 	{
-		r = t * t;
-		g = (1 - t) * t;
-		b = (1 - t) * (1 - t);
+		r = sin(4 * t);
+		g = sin(4 * t + 6);
+		b = sin(4 * t + 12); 
 	}
 	else
 	{
-		r = sin(5 * t);
-		g = sin(5 * t + 2);
-		b = sin(5 * t + 4);
+		r = cos(4 * t);
+		g = cos(4 * t + 2);
+		b = cos(4 * t + 4);
 	}
+
 	return (rgb(fabs(r), fabs(g), fabs(b)));
 }

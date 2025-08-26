@@ -6,15 +6,18 @@
 /*   By: scheragh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 18:48:36 by scheragh          #+#    #+#             */
-/*   Updated: 2025/08/18 19:03:47 by scheragh         ###   ########.fr       */
+/*   Updated: 2025/08/26 15:14:26 by scheragh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../inc/fractol.h"
-#include <math.h>
 
 static void	ft_print_usage(void)
 {
-	ft_printf("Not Allowed");
+	ft_printf("Usage:");
+	ft_printf("./fractol <Mandelbrot/Tricorn>\n");
+	ft_printf("./fractol <Julia> 0.xx 0.xx\n");
+	ft_printf("Example:\n");
+	ft_printf("./fractol <Julia> 0.32 0.42\n");
 }
 
 static int	check_args(int argc, char **argv, t_env *env)
@@ -49,7 +52,7 @@ int	main(int argc, char **argv)
 {
 	t_env	*env;
 
-	env = malloc(sizeof(t_env));
+	env = ft_calloc(1, sizeof(t_env));
 	if (!env || !check_args(argc, argv, env))
 		return (1);
 	initialise_mlx(env);
@@ -65,5 +68,6 @@ int	main(int argc, char **argv)
 	else
 		draw_julia(env);
 	mlx_loop(env->mlx);
+	ft_printf("hiii");
 	return (0);
 }

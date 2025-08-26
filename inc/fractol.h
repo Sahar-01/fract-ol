@@ -6,7 +6,7 @@
 /*   By: scheragh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 17:54:50 by scheragh          #+#    #+#             */
-/*   Updated: 2025/08/18 18:52:53 by scheragh         ###   ########.fr       */
+/*   Updated: 2025/08/26 14:40:28 by scheragh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef FRACTOL_H
@@ -18,8 +18,8 @@
 # include "keys.h"
 # include "type.h"
 # include <math.h>
-# define WIDTH 620
-# define HEIGHT 490
+# define WIDTH 500
+# define HEIGHT 400
 # define MAX_ITER 100
 
 typedef struct s_complex

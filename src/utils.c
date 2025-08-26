@@ -6,25 +6,10 @@
 /*   By: scheragh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 18:20:28 by scheragh          #+#    #+#             */
-/*   Updated: 2025/08/18 19:13:34 by scheragh         ###   ########.fr       */
+/*   Updated: 2025/08/26 15:32:16 by scheragh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../inc/fractol.h"
-#include <stdlib.h>
-#include <stdio.h>
-
-void	*safe_malloc(size_t size)
-{
-	void	*ptr;
-
-	ptr = malloc(size);
-	if (!ptr)
-	{
-		perror("malloc failed");
-		exit(EXIT_FAILURE);
-	}
-	return (ptr);
-}
 
 void	my_mlx_pixel_put(t_image *image, int x, int y, int color)
 {
@@ -45,6 +30,16 @@ int	ft_strcmp(const char *s1, const char *s2)
 	return ((unsigned char)*s1 - (unsigned char)*s2);
 }
 
+static void	draw_util(t_env *mlx_env)
+{
+	init_image(mlx_env);
+	if (mlx_env->fractal_type == JULIA)
+		draw_julia(mlx_env);
+	else if (mlx_env->fractal_type == MANDELBROT)
+		draw_mandelbrot(mlx_env);
+	else
+		draw_mandelbrot(mlx_env);
+}
 void	zoom(t_env *mlx_env, int x, int y, int direction)
 {
 	double	mouse_re;
@@ -70,12 +65,9 @@ void	zoom(t_env *mlx_env, int x, int y, int direction)
 	mlx_env->offset_y = mouse_im
 		- (y - HEIGHT / 2.0) / (0.5 * mlx_env->zoom * HEIGHT);
 	if (mlx_env->image.image)
-        	mlx_destroy_image(mlx_env->mlx, mlx_env->image.image);
-	init_image(mlx_env);
-	if (mlx_env->fractal_type == JULIA)
-		draw_julia(mlx_env);
-	else if (mlx_env->fractal_type == MANDELBROT)
-		draw_mandelbrot(mlx_env);
-	else
-		draw_mandelbrot(mlx_env);
+	{
+		mlx_destroy_image(mlx_env->mlx, mlx_env->image.image);
+		mlx_env->image.image = NULL;
+	}
+	draw_util(mlx_env);
 }

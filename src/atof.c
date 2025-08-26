@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   atof.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: scheragh <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/26 14:13:31 by scheragh          #+#    #+#             */
+/*   Updated: 2025/08/26 14:27:35 by scheragh         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 #include "../inc/fractol.h"
 
 static double	ft_atof_frac(const char *str)
@@ -25,8 +36,12 @@ double	ft_atof(const char *str)
 	sign = 1;
 	while (*str == ' ' || (*str >= 9 && *str <= 13))
 		str++;
-	if (*str == '+' || *str == '-')
-		sign = (*str++ == '-') ? -1 : 1;
+	while (*str == '+' || *str == '-')
+	{
+		if (*str == '-')
+			sign = -sign;
+		str++;
+	}
 	while (*str >= '0' && *str <= '9')
 		result = result * 10.0 + (*str++ - '0');
 	if (*str == '.')

@@ -6,7 +6,7 @@
 /*   By: scheragh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 17:59:46 by scheragh          #+#    #+#             */
-/*   Updated: 2025/08/18 18:37:55 by scheragh         ###   ########.fr       */
+/*   Updated: 2025/08/26 14:46:23 by scheragh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../inc/fractol.h"
@@ -21,10 +21,27 @@ static void	redraw_fractal(t_env *env)
 		draw_mandelbrot(env);
 }
 
+// void exit_cleanup(t_env *env, int flag, int errno)
+// {
+// 	free_mlx()
+// 	free_my_struct
+// 	free whatever
+// 	exit(errno)
+// }
+
 int	key_hook(int keycode, t_env *env)
 {
-	if (keycode == 65307)
+	if (keycode == KEY_ESC)
+	{
+		// close_window(env);
+		mlx_destroy_image(env->mlx, env->image.image);
+		mlx_destroy_window(env->mlx, env->window);
+		mlx_destroy_display(env->mlx);
+		// free(env->window);
+		free(env->mlx);
+		free(env);
 		exit(0);
+	}
 	else if (keycode == LEFT)
 		env->offset_x -= 0.1 / env->zoom;
 	else if (keycode == RIGHT)
