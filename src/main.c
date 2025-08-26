@@ -61,7 +61,7 @@ int	main(int argc, char **argv)
 	if (env->fractal_type == MANDELBROT)
 		draw_mandelbrot(env);
 	else if (env->fractal_type == TRICORN)
-		draw_tricorn(env);
+		draw_mandelbrot(env);
 	else
 		draw_julia(env);
 	mlx_loop(env->mlx);

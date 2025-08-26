@@ -17,6 +17,7 @@
 # include "image.h"
 # include "keys.h"
 # include "type.h"
+# include <math.h>
 # define WIDTH 620
 # define HEIGHT 490
 # define MAX_ITER 100
@@ -32,6 +33,7 @@ typedef struct s_env
 	int			x;
 	int			y;
 	int			max_iter;
+	int			color_mode;
 	double		zoom;
 	double		offset_x;
 	double		offset_y;
@@ -62,10 +64,9 @@ double		ft_atof(const char *str);
 //mandlebrot
 void		draw_julia(t_env *mlx_env);
 void		draw_mandelbrot(t_env *mlx_env);
-void		draw_tricorn(t_env *env);
 void		calculate_mandelbrot(t_env *env, int x, int y);
 
 //colours
 t_complex	get_complex(int x, int y, t_env *env);
-int			get_colour(int i, int max_iter);
+int			get_colour(int i, int max_iter, int mode);
 #endif

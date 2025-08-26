@@ -11,19 +11,24 @@
 /* ************************************************************************** */
 #include "../inc/fractol.h"
 
-static int	get_mandelbrot_iter(t_complex c, int max_iter)
+static int	get_mandelbrot_iter(t_complex c, int max_iter, int type)
 {
 	t_complex	z;
 	double		tmp;
 	int			i;
+	int		constant;
 
+	if (type == 0)
+		constant = 2.0;
+	else if (type == 2)
+		constant = -2.0;
 	i = 0;
 	z.re = 0;
 	z.im = 0;
 	while (i < max_iter)
 	{
 		tmp = z.re * z.re - z.im * z.im + c.re;
-		z.im = 2.0 * z.re * z.im + c.im;
+		z.im = constant * z.re * z.im + c.im;
 		z.re = tmp;
 		if ((z.re * z.re + z.im * z.im) > 4.0)
 			break ;
@@ -37,10 +42,12 @@ void	calculate_mandelbrot(t_env *env, int x, int y)
 	t_complex	c;
 	int			i;
 	int			colour;
+	int			type;
 
+	type = env->fractal_type;
 	c = get_complex(x, y, env);
-	i = get_mandelbrot_iter(c, env->max_iter);
-	colour = get_colour(i, env->max_iter);
+	i = get_mandelbrot_iter(c, env->max_iter, type);
+	colour = get_colour(i, env->max_iter, env->color_mode);
 	my_mlx_pixel_put(&env->image, x, y, colour);
 }
 

@@ -15,6 +15,7 @@
 enum e_linux_keys
 {
 	KEY_ESC = 65307,
+	KEY_C = 99,
 	LEFT = 65361,
 	RIGHT = 65363,
 	DOWN = 65364,

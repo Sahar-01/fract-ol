@@ -11,6 +11,16 @@
 /* ************************************************************************** */
 #include "../inc/fractol.h"
 
+static void	redraw_fractal(t_env *env)
+{
+	if (env->fractal_type == MANDELBROT)
+		draw_mandelbrot(env);
+	else if (env->fractal_type == JULIA)
+		draw_julia(env);
+	else if (env->fractal_type == TRICORN)
+		draw_mandelbrot(env);
+}
+
 int	key_hook(int keycode, t_env *env)
 {
 	if (keycode == 65307)
@@ -23,12 +33,17 @@ int	key_hook(int keycode, t_env *env)
 		env->offset_y -= 0.1 / env->zoom;
 	else if (keycode == DOWN)
 		env->offset_y += 0.1 / env->zoom;
+	else if (keycode == KEY_C)
+	{
+		env->color_mode++;
+		redraw_fractal(env);
+	}
 	init_image(env);
 	if (env->fractal_type == JULIA)
 		draw_julia(env);
 	else if (env->fractal_type == MANDELBROT)
 		draw_mandelbrot(env);
 	else
-		draw_tricorn(env);
+		draw_mandelbrot(env);
 	return (0);
 }

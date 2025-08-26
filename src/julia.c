@@ -38,7 +38,7 @@ void	calculate_julia(t_env *env, int x, int y)
 
 	z = get_complex(x, y, env);
 	i = get_julia_iter(z, env->julia_c, env->max_iter);
-	colour = get_colour(i, env->max_iter);
+	colour = get_colour(i, env->max_iter, env->color_mode);
 	my_mlx_pixel_put(&env->image, x, y, colour);
 }
 
