@@ -28,7 +28,7 @@ LDFLAGS = -L$(MLX_DIR) -lmlx_Linux -lXext -lX11 -lm -lz
 all: $(LIBFT_A) $(NAME)
 
 valgrind: all
-	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --verbose --log-file=valgrind-out.txt ./fractol Julia
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --verbose --log-file=valgrind-out.txt ./fractol
 
 $(NAME): $(OBJ_FILES)
 	@$(CC) $(OBJ_FILES) $(LIBFT_A) $(LDFLAGS) -o $(NAME)

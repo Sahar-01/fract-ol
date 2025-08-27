@@ -6,7 +6,7 @@
 /*   By: scheragh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 18:20:28 by scheragh          #+#    #+#             */
-/*   Updated: 2025/08/26 15:32:16 by scheragh         ###   ########.fr       */
+/*   Updated: 2025/08/27 12:46:27 by scheragh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../inc/fractol.h"
@@ -40,15 +40,9 @@ static void	draw_util(t_env *mlx_env)
 	else
 		draw_mandelbrot(mlx_env);
 }
-void	zoom(t_env *mlx_env, int x, int y, int direction)
-{
-	double	mouse_re;
-	double	mouse_im;
 
-	mouse_re = (x - WIDTH / 2.0) / (0.5 * mlx_env->zoom * WIDTH)
-		+ mlx_env->offset_x;
-	mouse_im = (y - HEIGHT / 2.0) / (0.5 * mlx_env->zoom * HEIGHT)
-		+ mlx_env->offset_y;
+static void	zoom_direction_helper(t_env *mlx_env, int direction)
+{
 	if (direction > 0)
 	{
 		mlx_env->zoom *= 1.1;
@@ -60,6 +54,18 @@ void	zoom(t_env *mlx_env, int x, int y, int direction)
 		if (mlx_env->max_iter > 50)
 			mlx_env->max_iter -= 10;
 	}
+}
+
+void	zoom(t_env *mlx_env, int x, int y, int direction)
+{
+	double	mouse_re;
+	double	mouse_im;
+
+	mouse_re = (x - WIDTH / 2.0) / (0.5 * mlx_env->zoom * WIDTH)
+		+ mlx_env->offset_x;
+	mouse_im = (y - HEIGHT / 2.0) / (0.5 * mlx_env->zoom * HEIGHT)
+		+ mlx_env->offset_y;
+	zoom_direction_helper(mlx_env, direction);
 	mlx_env->offset_x = mouse_re
 		- (x - WIDTH / 2.0) / (0.5 * mlx_env->zoom * WIDTH);
 	mlx_env->offset_y = mouse_im

@@ -6,7 +6,7 @@
 /*   By: scheragh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 18:08:58 by scheragh          #+#    #+#             */
-/*   Updated: 2025/08/26 15:45:44 by scheragh         ###   ########.fr       */
+/*   Updated: 2025/08/27 12:44:14 by scheragh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../inc/fractol.h"
@@ -35,17 +35,34 @@ static int	rgb(double r, double g, double b)
 	return ((ri << 16) | (gi << 8) | bi);
 }
 
+static void	sin_colour_helper(double *r, double *g, double *b, double t)
+{
+	*r = sin(4 * t);
+	*g = sin(4 * t + 6);
+	*b = sin(4 * t + 12);
+}
+
+static void	cos_colour_helper(double *r, double *g, double *b, double t)
+{
+	*r = cos(4 * t);
+	*g = cos(4 * t + 2);
+	*b = cos(4 * t + 4);
+}
+
 int	get_colour(int i, int max_iter, int mode)
 {
-	double	t = 0.0;
-	double	r = 0.0;
-	double	g = 0.0;
-	double	b = 0.0;
+	double	t;
+	double	r;
+	double	g;
+	double	b;
+
+	t = 0.0;
+	r = 0.0;
+	g = 0.0;
+	b = 0.0;
 	if (max_iter <= 0 || i >= max_iter || i < 0)
 		return (0x000000);
-
 	t = (double)i / (double)max_iter;
-
 	if (mode % 3 == 0)
 	{
 		r = 9 * (1 - t) * t * t * t;
@@ -53,17 +70,8 @@ int	get_colour(int i, int max_iter, int mode)
 		b = 8.5 * (1 - t) * (1 - t) * (1 - t) * t;
 	}
 	else if (mode % 3 == 1)
-	{
-		r = sin(4 * t);
-		g = sin(4 * t + 6);
-		b = sin(4 * t + 12); 
-	}
+		sin_colour_helper(&r, &g, &b, t);
 	else
-	{
-		r = cos(4 * t);
-		g = cos(4 * t + 2);
-		b = cos(4 * t + 4);
-	}
-
+		cos_colour_helper(&r, &g, &b, t);
 	return (rgb(fabs(r), fabs(g), fabs(b)));
 }
